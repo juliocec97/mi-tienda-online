@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda Online Revolico Ciego de Ávila</title>
+    <title>Tu Tienda Online - Productos Increíbles</title>
     <meta name="description" content="Descubre nuestra selección de productos únicos y de alta calidad. Envío rápido y excelente atención al cliente.">
     <link rel="canonical" href="https://tutiendaonline.com/"> <!-- Cambia esto a la URL de tu sitio -->
 
@@ -117,87 +117,45 @@
     </a>
 
     <script>
-        // --- Datos de los Productos ---
-        // Aquí es donde añadirás, editarás o eliminarás tus productos.
-        // Cada objeto en este array representa un producto.
-        const productsData = [
-            {
-                id: 'producto-1',
-                name: 'Auriculares Inalámbricos X1',
-                description: 'Sonido de alta fidelidad, cómodos y con batería de larga duración. Perfectos para tu día a día.',
-                price: '2800',
-                image: 'https://juliocec97.github.io/mi-tienda-online/img/audifono.jpg', // Reemplaza con la URL de tu imagen real
-                category: 'Electrónica'
-            },
-            {
-                id: 'producto-2',
-                name: 'Smartwatch Serie 5',
-                description: 'Mantente conectado y monitorea tu salud con estilo. Notificaciones, ritmo cardíaco y más.',
-                price: '99.50',
-                image: 'https://placehold.co/600x400/33FF57/FFFFFF?text=Smartwatch%20S5',
-                category: 'Electrónica'
-            },
-            {
-                id: 'producto-3',
-                name: 'Taza de Café con Diseño "Geométrico"',
-                description: 'Disfruta tu bebida favorita en esta taza única con un diseño moderno. Capacidad de 350ml.',
-                price: '12.00',
-                image: 'https://placehold.co/600x400/3357FF/FFFFFF?text=Taza%20Geom.',
-                category: 'Hogar'
-            },
-            {
-                id: 'producto-4',
-                name: 'Libreta Ecológica de Bambú',
-                description: 'Escribe tus ideas en esta libreta sostenible con cubiertas de bambú y papel reciclado.',
-                price: '8.75',
-                image: 'https://placehold.co/600x400/F0FF33/000000?text=Libreta%20Eco',
-                category: 'Oficina'
-            },
-            {
-                id: 'producto-5',
-                name: 'Mochila Urbana Resistente al Agua',
-                description: 'Ideal para la ciudad y tus aventuras. Compartimentos espaciosos y material duradero.',
-                price: '55.00',
-                image: 'https://placehold.co/600x400/8A2BE2/FFFFFF?text=Mochila%20Urb.',
-                category: 'Accesorios'
-            },
-            {
-                id: 'producto-6',
-                name: 'Set de Velas Aromáticas (3 unidades)',
-                description: 'Crea un ambiente relajante con nuestras velas de cera de soja con aromas a lavanda, vainilla y sándalo.',
-                price: '25.00',
-                image: 'https://placehold.co/600x400/FF00FF/FFFFFF?text=Velas%20Arom.',
-                category: 'Hogar'
-            },
-            {
-                id: 'producto-7',
-                name: 'Cámara Instantánea Vintage',
-                description: 'Captura tus momentos al instante con un toque retro. Incluye un paquete de películas.',
-                price: '120.00',
-                image: 'https://placehold.co/600x400/ADD8E6/000000?text=Cámara%20Inst.',
-                category: 'Fotografía'
-            },
-            {
-                id: 'producto-8',
-                name: 'Botella de Agua Deportiva (1L)',
-                description: 'Hidrátate mientras haces ejercicio con esta botella de acero inoxidable, libre de BPA.',
-                price: '18.99',
-                image: 'https://placehold.co/600x400/90EE90/000000?text=Botella%20Dep.',
-                category: 'Deportes'
-            }
-            // Puedes añadir más productos aquí siguiendo el mismo formato.
-        ];
-
         // --- Lógica de Carga de Productos y Lazy Loading ---
-        document.addEventListener('DOMContentLoaded', () => {
+        // Este script se ejecuta una vez que el contenido de la página está completamente cargado.
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Obtener el contenedor donde se listarán los productos.
             const productListDiv = document.getElementById('product-list');
-            const whatsappNumber = 'TUNUMEROTELEFONO'; // ¡IMPORTANTE! Reemplaza con tu número de teléfono con código de país (ej: 5351234567)
+            // Definir el número de WhatsApp para los enlaces directos.
+            // ¡IMPORTANTE! Reemplaza 'TUNUMEROTELEFONO' con tu número de teléfono con código de país (ej: 5351234567).
+            const whatsappNumber = 'TUNUMEROTELEFONO';
 
-            // Función para renderizar un producto
+            // Variable para almacenar los datos de los productos.
+            let productsData = [];
+
+            try {
+                // Intentar cargar los datos de los productos desde 'products.json'.
+                const response = await fetch('products.json');
+                // Verificar si la respuesta de la solicitud fue exitosa (código 200 OK).
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                // Convertir la respuesta a formato JSON y asignarla a productsData.
+                productsData = await response.json();
+            } catch (error) {
+                // Capturar y registrar cualquier error durante la carga de los datos.
+                console.error('Error fetching product data:', error);
+                // Mostrar un mensaje de error amigable al usuario en la interfaz.
+                productListDiv.innerHTML = '<p class="text-center text-red-500">Lo sentimos, no pudimos cargar los productos en este momento. Por favor, inténtelo de nuevo más tarde.</p>';
+                // Detener la ejecución del script si los productos no pueden cargarse.
+                return;
+            }
+
+            // Función para renderizar (mostrar) un producto en la galería.
             const renderProduct = (product) => {
+                // Crear un nuevo elemento div para la tarjeta del producto.
                 const productCard = document.createElement('div');
-                productCard.id = product.id; // Asigna el ID para enlaces directos
+                // Asignar el ID del producto al elemento, para permitir enlaces directos.
+                productCard.id = product.id;
+                // Asignar clases de Tailwind CSS para el estilo de la tarjeta del producto.
                 productCard.className = 'bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden relative group';
+                // Llenar el HTML interno de la tarjeta con los datos del producto.
                 productCard.innerHTML = `
                     <img data-src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover object-center rounded-t-xl group-hover:scale-105 transition-transform duration-300 lazy-load">
                     <div class="p-6">
@@ -212,63 +170,79 @@
                         </a>
                     </div>
                 `;
+                // Añadir la tarjeta del producto al contenedor de la lista de productos.
                 productListDiv.appendChild(productCard);
             };
 
-            // Cargar todos los productos
+            // Recorrer el array de productos y renderizar cada uno.
             productsData.forEach(renderProduct);
 
-            // Lazy Loading de Imágenes
+            // Función para implementar el Lazy Loading de imágenes.
             const lazyLoadImages = () => {
+                // Seleccionar todas las imágenes marcadas para lazy load.
                 const lazyImages = document.querySelectorAll('img.lazy-load');
+                // Crear un Intersection Observer.
                 const observer = new IntersectionObserver((entries, observer) => {
                     entries.forEach(entry => {
+                        // Si la imagen está intersectando el viewport (o el rootMargin).
                         if (entry.isIntersecting) {
                             const img = entry.target;
-                            img.src = img.dataset.src; // Carga la imagen
+                            // Cargar la imagen real desde el atributo data-src.
+                            img.src = img.dataset.src;
+                            // Cuando la imagen se haya cargado, eliminar la clase 'lazy-load' y añadir 'loaded'.
                             img.onload = () => {
                                 img.classList.remove('lazy-load');
-                                img.classList.add('loaded'); // Añade clase para mostrar la imagen
+                                img.classList.add('loaded');
                             };
-                            observer.unobserve(img); // Deja de observar una vez cargada
+                            // Dejar de observar la imagen una vez que se ha cargado.
+                            observer.unobserve(img);
                         }
                     });
+                }, {
+                    // Cargar imágenes 200px antes de que sean visibles en el viewport.
+                    rootMargin: '0px 0px 200px 0px'
                 });
 
+                // Observar cada imagen marcada para lazy load.
                 lazyImages.forEach(img => {
                     observer.observe(img);
                 });
             };
 
-            lazyLoadImages(); // Llama a la función de lazy loading
+            // Llamar a la función de lazy loading para iniciar el proceso.
+            lazyLoadImages();
 
-            // Actualizar año en el pie de página
+            // Actualizar el año actual en el pie de página.
             document.getElementById('current-year').textContent = new Date().getFullYear();
 
-            // Actualizar el número de WhatsApp en el botón flotante y el enlace de contacto
+            // Actualizar el número de WhatsApp en el botón flotante y el enlace de contacto.
             document.querySelectorAll('.whatsapp-button, #contacto a.bg-green-500').forEach(link => {
                 link.href = link.href.replace('TUNUMEROTELEFONO', whatsappNumber);
             });
 
-            // Función para manejar el desplazamiento a un producto específico si hay un hash en la URL
+            // Función para manejar el desplazamiento a un producto específico si hay un hash en la URL.
             const scrollToProduct = () => {
-                const productId = window.location.hash.substring(1); // Obtiene el ID sin el '#'
+                // Obtener el ID del producto de la URL (ej. #producto-1).
+                const productId = window.location.hash.substring(1);
                 if (productId) {
+                    // Buscar el elemento del producto por su ID.
                     const targetElement = document.getElementById(productId);
                     if (targetElement) {
+                        // Desplazarse suavemente al producto.
                         targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        // Opcional: Resaltar el producto
+                        // Opcional: Resaltar el producto temporalmente.
                         targetElement.classList.add('ring-4', 'ring-indigo-400', 'ring-opacity-75');
                         setTimeout(() => {
                             targetElement.classList.remove('ring-4', 'ring-indigo-400', 'ring-opacity-75');
-                        }, 3000); // Elimina el resaltado después de 3 segundos
+                        }, 3000); // Eliminar el resaltado después de 3 segundos.
                     }
                 }
             };
 
-            scrollToProduct(); // Llama la función al cargar la página
+            // Llamar a la función al cargar la página para manejar enlaces directos.
+            scrollToProduct();
 
-            // Escucha cambios en el hash de la URL (navegación a producto específico)
+            // Escuchar cambios en el hash de la URL (navegación a producto específico).
             window.addEventListener('hashchange', scrollToProduct);
         });
     </script>
