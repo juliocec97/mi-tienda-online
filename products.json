@@ -1,0 +1,66 @@
+[
+    {
+        "id": "auriculares-inalambricos-x1",
+        "name": "Auriculares Inalámbricos X1",
+        "description": "Sonido de alta fidelidad, cómodos y con batería de larga duración. Perfectos para tu día a día.",
+        "price": "3000 cup",
+        "image": "images/auriculare.jpg",
+        "category": "Electrónica"
+    },
+    {
+        "id": "smartwatch-serie-5",
+        "name": "Smartwatch Serie 5",
+        "description": "Mantente conectado y monitorea tu salud con estilo. Notificaciones, ritmo cardíaco y más.",
+        "price": "99.50",
+        "image": "images/smartwatch-s5.png",
+        "category": "Electrónica"
+    },
+    {
+        "id": "taza-cafe-geometrico",
+        "name": "Taza de Café con Diseño 'Geométrico'",
+        "description": "Disfruta tu bebida favorita en esta taza única con un diseño moderno. Capacidad de 350ml.",
+        "price": "12.00",
+        "image": "images/taza-geometrica.jpg",
+        "category": "Hogar"
+    },
+    {
+        "id": "libreta-ecologica-bambu",
+        "name": "Libreta Ecológica de Bambú",
+        "description": "Escribe tus ideas en esta libreta sostenible con cubiertas de bambú y papel reciclado.",
+        "price": "8.75",
+        "image": "images/libreta-ecologica.jpg",
+        "category": "Oficina"
+    },
+    {
+        "id": "mochila-urbana-resistente-agua",
+        "name": "Mochila Urbana Resistente al Agua",
+        "description": "Ideal para la ciudad y tus aventuras. Compartimentos espaciosos y material duradero.",
+        "price": "55.00",
+        "image": "images/mochila-urbana.jpg",
+        "category": "Accesorios"
+    },
+    {
+        "id": "set-velas-aromaticas-3u",
+        "name": "Set de Velas Aromáticas (3 unidades)",
+        "description": "Crea un ambiente relajante con nuestras velas de cera de soja con aromas a lavanda, vainilla y sándalo.",
+        "price": "25.00",
+        "image": "images/velas-aromaticas.jpg",
+        "category": "Hogar"
+    },
+    {
+        "id": "camara-instantanea-vintage",
+        "name": "Cámara Instantánea Vintage",
+        "description": "Captura tus momentos al instante con un toque retro. Incluye un paquete de películas.",
+        "price": "120.00",
+        "image": "images/camara-instantanea.jpg",
+        "category": "Fotografía"
+    },
+    {
+        "id": "botella-agua-deportiva-1l",
+        "name": "Botella de Agua Deportiva (1L)",
+        "description": "Hidrátate mientras haces ejercicio con esta botella de acero inoxidable, libre de BPA.",
+        "price": "18.99",
+        "image": "images/botella-deportiva.jpg",
+        "category": "Deportes"
+    }
+]
